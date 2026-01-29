@@ -185,7 +185,7 @@
 
     async function speakDouble(v1, v2, callback) {
         speechSynthesis.cancel();
-        const innerDelay = 600; // 現在形と過去形の間の待ち時間
+        const innerDelay = 500; // 現在形と過去形の間の待ち時間
 
         await new Promise(r => speak(v1, r));
         await new Promise(r => setTimeout(r, innerDelay));
