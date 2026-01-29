@@ -164,16 +164,21 @@
         
         const msg = new SpeechSynthesisUtterance(targetText.trim());
         msg.lang = 'en-US';
-        msg.rate = 1.0;
+        msg.rate = 0.75; // 読み上げ速度
         msg.onend = callback;
         speechSynthesis.speak(msg);
     }
 
-    async function speakDouble(v1, v2, callback) {
+async function speakDouble(v1, v2, callback) {
         speechSynthesis.cancel();
+        const innerDelay = 500; // 現在形と過去形の間の待ち時間
+
         await new Promise(r => speak(v1, r));
+        await new Promise(r => setTimeout(r, innerDelay));
+        
         await new Promise(r => speak(v2, r));
-        if(callback) callback();
+        
+        if (callback) callback();
     }
 
     async function playGroup(startIndex, count) {
